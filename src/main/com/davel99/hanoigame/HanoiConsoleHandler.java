@@ -8,8 +8,7 @@ public class HanoiConsoleHandler {
 	public Scanner s = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		
-
+		new HanoiConsoleHandler();
 	}
 	
 	public HanoiConsoleHandler() {
@@ -31,8 +30,14 @@ public class HanoiConsoleHandler {
 		int to = Integer.valueOf(towerTo);
 		
 		String controlsMessage = "Press any key to continue or x to exit";
-		String movementStatus = "Movement failed, try again. " + controlsMessage;
-		
+		String movementStatus = "Movement failed, try again.";
+		boolean canMove = this.game.canMakeMovement(from, to);
+		if(canMove) movementStatus = "Success movement.";
+		movementStatus += " " + controlsMessage;
+		this.game.makeMovement(from, to);
+		System.out.println(movementStatus);
+		String answer = this.s.nextLine();
+		if(answer.equals("x")) this.isGameOn = false;		
 	}
 	
 	public void printTowerData() {
