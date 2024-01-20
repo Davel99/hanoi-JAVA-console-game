@@ -44,10 +44,10 @@ public class HanoiConsoleHandler {
 		int towersLen = this.game.towers.length;
 		for(int i = 0; i < towersLen; i++) {
 			HanoiTower tower = this.game.towers[i];
-			int ringsSize = tower.rings.size();
-			String consoleResponse = "Tower "+tower.id+":";
+			int ringsSize = tower.rings.size()-1;
+			String consoleResponse = "Tower "+tower.id+":   |";
 			
-			for(int ringCount = 0; ringCount < ringsSize; ringCount++) {
+			for(int ringCount = ringsSize; ringCount >= 0; ringCount--) {
 				HanoiRing ring = tower.rings.get(ringCount);
 				consoleResponse += ring.size + "|";
 			}
