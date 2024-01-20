@@ -11,12 +11,10 @@ public class HanoiTower {
 	}
 	
 	public boolean canAddRing(HanoiRing ring) {
-		//Implement logic to check rings later
-		return true;
+		return this.checkRing(ring.size);
 	}
 	
 	public boolean addRing(HanoiRing ring) {
-		if(!this.checkRing(ring.size)) return false;
 		this.rings.addFirst(ring);
 		return true;
 		

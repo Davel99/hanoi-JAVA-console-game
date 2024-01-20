@@ -45,7 +45,6 @@ public class HanoiGameHandler {
 			HanoiRing ring = this.rings[ringCount];
 			HanoiTower tower = this.towers[towerCount];
 			if(tower.canAddRing(ring)) tower.addRing(ring);
-			//System.out.println("Ring of size "+ ring.size +" added to tower "+towerCount);
 			ringCount--;
 			towerCount++;
 		}
