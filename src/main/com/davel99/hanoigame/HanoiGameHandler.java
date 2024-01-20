@@ -14,22 +14,25 @@ public class HanoiGameHandler {
 	}
 	
 	public boolean canMakeMovement(int from, int to) {
-		HanoiRing movedRing = this.towers[from].rings.getFirst();
-		HanoiRing destinationRing = this.towers[to].rings.getFirst();
+		HanoiTower fromTower = this.towers[from];
+		HanoiTower toTower = this.towers[to];
+		
+		if(fromTower.rings.isEmpty()) return false;
+		if(toTower.rings.isEmpty()) return true;
+		
+		HanoiRing movedRing = fromTower.rings.getFirst();
+		HanoiRing destinationRing = toTower.rings.getFirst();
 		if(movedRing.size < destinationRing.size) return true;
-		return false;		
+		return false;
 	}
 	
 	public boolean makeMovement(int from, int to) {
 		HanoiTower fromTower = this.towers[from];
-		HanoiTower toTower = this.towers[to];
+		HanoiTower toTower = this.towers[to];		
 		HanoiRing movedRing = fromTower.rings.getFirst();
-		HanoiRing destinationRing = toTower.rings.getFirst();
-		if(!(movedRing.size < destinationRing.size)) return false;
 		fromTower.rings.removeFirst();
 		toTower.addRing(movedRing);
-		return true;
-		
+		return true;		
 	}
 	
 	public void addRings() {

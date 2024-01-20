@@ -34,11 +34,10 @@ public class HanoiConsoleHandler {
 		boolean canMove = false;
 		try {
 			canMove = this.handleMovement(from, to);
+			if(canMove) this.game.makeMovement(from, to);	
 		} catch (Exception e) {
 			this.movementStatus = "Something went wrong. Please make sure your inputs are correct. "+this.exitMessage;
-		}
-		
-		if(canMove) this.game.makeMovement(from, to);		
+		}	
 		System.out.println(this.movementStatus);
 		String answer = this.s.nextLine();
 		if(answer.equals("x")) this.isGameOn = false;		
