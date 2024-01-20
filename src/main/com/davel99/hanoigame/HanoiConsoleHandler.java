@@ -5,11 +5,13 @@ import java.util.Scanner;
 public class HanoiConsoleHandler {
 	public HanoiGameHandler game;
 	public boolean isGameOn;
+	public boolean isWinner;
 	public int movementCount = 0;
 	public Scanner s = new Scanner(System.in);
 	public String messageFromTower = "Choose tower ID which first ring you want to move out";
 	public String messageToTower = "Choose tower ID which first ring you want to move in";
 	public String exitMessage = "Press any key to continue or x to exit";
+	public String farewell = "Thank you for playing";
 	public String movementStatus;
 
 	public static void main(String[] args) {
@@ -19,9 +21,20 @@ public class HanoiConsoleHandler {
 	public HanoiConsoleHandler() {
 		this.game = new HanoiGameHandler(3,5);
 		this.isGameOn = true;
+		this.isWinner = false;
 		while(this.isGameOn) {
-			this.startConsoleGameLoop();
+			this.isWinner = this.game.checkGameStatus();
+			if(!this.isWinner) {
+				this.startConsoleGameLoop();				
+			} else {
+				String message = "Winner!";
+				String movementsDone = "Player movements done: " + this.movementCount;
+				System.out.println(message);
+				System.out.println(movementsDone);
+				this.isGameOn = false;
+			}			
 		}
+		System.out.println(this.farewell);
 	}
 	
 	public void startConsoleGameLoop() {

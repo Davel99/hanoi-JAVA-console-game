@@ -1,5 +1,7 @@
 package main.com.davel99.hanoigame;
 
+import java.util.LinkedList;
+
 public class HanoiGameHandler {
 	public HanoiTower[] towers;
 	public HanoiRing[] rings;
@@ -60,6 +62,36 @@ public class HanoiGameHandler {
 			this.rings[i] = new HanoiRing(i+1,"Green");
 		}
 		
+	}
+	
+	public boolean checkGameStatus() {
+		int filledTowers = 0;
+		int finalTower = 0;
+		for(int i = 0; i < this.towers.length; i++) {
+			HanoiTower tower = this.towers[i];
+			if(!tower.rings.isEmpty()) filledTowers++;
+			else finalTower = i;
+		}
+		if(filledTowers != 1) return false;
+		LinkedList<HanoiRing> finalRings = this.towers[finalTower].rings;
+		int lastNumber = 0;
+		boolean firstCheck = true;
+		boolean isWinning = true;
+		
+		for(int i = 0; i < finalRings.size(); i++) {
+			HanoiRing ring = finalRings.get(i);
+			if(firstCheck) {
+				firstCheck = false;
+				lastNumber = ring.size;
+			}
+			else {
+				if(!(lastNumber < ring.size)) isWinning = false;
+			}
+			
+			if(!isWinning) break;
+		}
+		
+		return isWinning;
 	}
 	
 
