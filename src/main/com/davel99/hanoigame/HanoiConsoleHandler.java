@@ -6,6 +6,9 @@ public class HanoiConsoleHandler {
 	public HanoiGameHandler game;
 	public boolean isGameOn;
 	public Scanner s = new Scanner(System.in);
+	public String messageFromTower = "Choose tower ID which first ring you want to move out";
+	public String messageToTower = "Choose tower ID which first ring you want to move in";
+	public String exitMessage = "Press any key to continue or x to exit";
 
 	public static void main(String[] args) {
 		new HanoiConsoleHandler();
@@ -21,23 +24,27 @@ public class HanoiConsoleHandler {
 	
 	public void startConsoleGameLoop() {
 		this.printTowerData();
-		System.out.println("Choose tower ID which first ring you want to move out");
-		String towerFrom = this.s.nextLine();
-		System.out.println("Choose tower ID which first ring you want to move in");
-		String towerTo = this.s.nextLine();
+		
+		String towerFrom = this.readAnswer(messageFromTower);
+		String towerTo = this.readAnswer(messageToTower);
 		
 		int from = Integer.valueOf(towerFrom);
 		int to = Integer.valueOf(towerTo);
 		
-		String controlsMessage = "Press any key to continue or x to exit";
 		String movementStatus = "Movement failed, try again.";
 		boolean canMove = this.game.canMakeMovement(from, to);
 		if(canMove) movementStatus = "Success movement.";
-		movementStatus += " " + controlsMessage;
+		movementStatus += " " + this.exitMessage;
 		this.game.makeMovement(from, to);
 		System.out.println(movementStatus);
 		String answer = this.s.nextLine();
 		if(answer.equals("x")) this.isGameOn = false;		
+	}
+	
+	public String readAnswer(String message) {
+		System.out.println(message);
+		String answer = this.s.nextLine();
+		return answer;
 	}
 	
 	public void printTowerData() {
