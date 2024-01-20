@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class HanoiConsoleHandler {
 	public HanoiGameHandler game;
 	public boolean isGameOn;
+	public int movementCount = 0;
 	public Scanner s = new Scanner(System.in);
 	public String messageFromTower = "Choose tower ID which first ring you want to move out";
 	public String messageToTower = "Choose tower ID which first ring you want to move in";
@@ -24,6 +25,7 @@ public class HanoiConsoleHandler {
 	}
 	
 	public void startConsoleGameLoop() {
+		System.out.println("Movements done: " + this.movementCount);
 		this.printTowerData();
 		
 		String towerFrom = this.readAnswer(messageFromTower);
@@ -34,7 +36,10 @@ public class HanoiConsoleHandler {
 		boolean canMove = false;
 		try {
 			canMove = this.handleMovement(from, to);
-			if(canMove) this.game.makeMovement(from, to);	
+			if(canMove) {
+				this.game.makeMovement(from, to);
+				this.movementCount++;
+			}
 		} catch (Exception e) {
 			this.movementStatus = "Something went wrong. Please make sure your inputs are correct. "+this.exitMessage;
 		}	
